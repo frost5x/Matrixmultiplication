@@ -1,5 +1,3 @@
-#define _CRT_SECURE_NO_WARNINGS
-
 #include <stdio.h>
 #include <stdlib.h>
 #include "Initialization.h"
@@ -14,45 +12,46 @@ int main(int argc,char *argv[])
 	Directory1 = "C:\\Users\\John\\Desktop\\Array.txt";
 	Directory2 = "C:\\Users\\John\\Desktop\\Matrix.txt";
 
-	
-
 	//************动态数组（二维）***********//
 	double **Matrix;
 	int m = 20,n = 20;
-    int bandwidth=5;
+	int Bandwidth = 5;
 
 	Matrix = (double**)malloc(m*sizeof(double*));
 	for(i=0;i<m;i++)
 	{
 		*(Matrix+i) = (double*)malloc(n*sizeof(double));
 	}
-
+    double *x,*b;
+	x = (double*)malloc(n*sizeof(double));
+	b = (double*)malloc(m*sizeof(double));
+	
+	InitializeArray(x,n,1.0);
+	InitializeArray(b,m,0);
 	InitializeMatrix(Matrix,m,n,0.0);
-
-	MatrixDefinition( Matrix, m, bandwidth)
-
-
-	PrintMatrix(Matrix,Directory2,"BBB",m,n);
+	
+	MatrixMultiply(Matrix,x,b,m,n);	
+	MatrixDefinition(Matrix,m,Bandwidth);
+	
+	
+    PrintArray(x,Directory1,'x',n)
+	PrintArray(b,Directory1,'b',m)
+	PrintMatrix(Matrix,Directory2,"A",m,n);
+	
+	
+	//MATRIX MULTIPLY  Ax=b 矩阵乘法
+	
+	
+	
+	
+	
+	
+	//矩阵乘法结束
+	
+	
+	
 
 	system("pause");
-
-	//************从文件读取***********//
-	//FILE *fp;
-	//double x,y,z;
-	//for(j=0;j<i;j++)
-	//{
-	//	fscanf(fp,"%lf %lf %lf",&x,&y,&z);
-	//	CoordX[j] = x;
-	//	CoordY[j] = y;
-	//	CoordZ[j] = z;
-	//}
-	//fclose(fp);
-	//
-	//printf("Which row would you like to check?\n");
-	//scanf("%d",&i);
-	//printf("%lf %lf %lf\n",CoordX[i],CoordY[i],CoordZ[i]);
-	//
-	//system("pause");
 
 	//************基本变量***********//
 	//声明//
